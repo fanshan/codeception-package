@@ -16,28 +16,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
     /** @var ApplicationInterface */
     protected $application;
 
-    protected function setUp()
-    {
-        $this->initialize();
-    }
-
-    protected function initialize()
-    {
-        $this->application = $this->createApplication();
-    }
-
-    /**
-     * @return ApplicationInterface
-     */
-    public function createApplication() : ApplicationInterface
-    {
-        $app = new Application();
-        $app->setEnv('test');
-        $app->loadConfig('app/config');
-
-        return $app;
-    }
-
     /**
      * @return ApplicationInterface
      */
