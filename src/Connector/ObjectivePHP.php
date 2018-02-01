@@ -1,9 +1,10 @@
 <?php
 
-namespace Codeception\Module\Connector;
+namespace ObjectivePHP\Package\Codeception\Connector;
 
 use ObjectivePHP\Application\ApplicationInterface;
 use Symfony\Component\BrowserKit\Client;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
 use Zend\Diactoros\ServerRequest;
@@ -22,20 +23,12 @@ class ObjectivePHP extends Client
     protected $application;
 
     /**
-     * @param ApplicationInterface $application
-     */
-    public function setApplication(ApplicationInterface $application)
-    {
-        $this->application = $application;
-    }
-
-    /**
-     * {@inheritdoc}
+     * @param Request $request
+     *
+     * @return Response
      */
     protected function doRequest($request)
     {
-        $this->application->init();
-
         $_GET = $_POST = [];
 
         $inputStream = fopen('php://memory', 'r+');
@@ -92,7 +85,7 @@ class ObjectivePHP extends Client
         );
     }
 
-    private function convertFiles(array $files)
+    protected function convertFiles(array $files)
     {
         $fileObjects = [];
         foreach ($files as $fieldName => $file) {
@@ -113,7 +106,7 @@ class ObjectivePHP extends Client
         return $fileObjects;
     }
 
-    private function extractHeaders(BrowserKitRequest $request)
+    protected function extractHeaders(BrowserKitRequest $request)
     {
         $headers = [];
         $server = $request->getServer();
@@ -130,5 +123,29 @@ class ObjectivePHP extends Client
         }
 
         return $headers;
+    }
+
+    /**
+     * Get Application
+     *
+     * @return ApplicationInterface
+     */
+    public function getApplication(): ApplicationInterface
+    {
+        return $this->application;
+    }
+
+    /**
+     * Set Application
+     *
+     * @param ApplicationInterface $application
+     *
+     * @return $this
+     */
+    public function setApplication(ApplicationInterface $application)
+    {
+        $this->application = $application;
+
+        return $this;
     }
 }

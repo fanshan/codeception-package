@@ -2,7 +2,7 @@
     "name": "objective-php/codeception-package",
     "description": "Codeception integration for Objective PHP framework",
     "type": "library",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-only",
     "authors": [
         {
             "name": "Vincent Simonin",
@@ -11,7 +11,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Codeception\\Module\\": "src"
+            "ObjectivePHP\\Package\\Codeception\\": "src",
+            "Codeception\\Module\\": "module"
         }
     },
     "require": {

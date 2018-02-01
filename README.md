@@ -18,7 +18,9 @@ modules:
     enabled:
         - ObjectivePHP:
             application_class: Namespace\Where\Is\Your\Project\Application
+            config_path: app/config
         - \Helper\Functional
 ```
 
 * `application_class`: contain your Application class namespace
+* `config_path`: contain the path to your configuration files
